@@ -1,0 +1,57 @@
+int ir1=2;//ir sensor 2
+int ir2=3;//ir sensor 2
+int ir3=4;//ir sensor 3
+int ir4=5;//ir sensor 3
+int led1=8;//led1
+int led2=7;//led2
+int led3=6;//led3
+
+int in1=0;//to read value from ir sensor1
+int in2=0;//to read value from ir sensor2
+int in3=0;//to read value from ir sensor3
+int out=0;//to read value from ir sensor2
+
+int ldr = A0;//ldr
+int ldrvalue = 0;//to read value from ldr
+
+void setup() //setting pins
+{
+  pinMode(ir1,INPUT);
+  pinMode(ir2,INPUT);
+  pinMode(ir3,INPUT);
+  pinMode(ir4,INPUT);
+  pinMode(led1,OUTPUT);
+  pinMode(led2,OUTPUT);
+  pinMode(led3,OUTPUT);
+}
+
+void loop(){
+  in1=digitalRead(ir1);//reads value from ir sensor1
+  in2=digitalRead(ir2);//reads value from ir sensor1
+  in3=digitalRead(ir3);//reads value from ir sensor1
+  out=digitalRead(ir4);//reads value from ir sensor2
+  ldrvalue = analogRead(ldr);//reads value from ldr
+
+if((in1==HIGH) && (ldrvalue>500))//500 is set as the threshold value for ldr
+{
+  digitalWrite(led1,HIGH);
+}
+if((in2==HIGH) && (ldrvalue>500))
+{
+  digitalWrite(led2,HIGH);
+  delay(500);
+  digitalWrite(led1,LOW);
+}
+if((in3==HIGH) && (ldrvalue>500))
+{
+  digitalWrite(led3,HIGH);
+  delay(500);
+  digitalWrite(led2,LOW);
+}
+if((out==HIGH) && (ldrvalue>500))
+{
+  digitalWrite(led3,LOW);
+}
+
+
+}
